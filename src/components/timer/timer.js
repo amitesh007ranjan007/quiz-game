@@ -2,31 +2,31 @@ import {ProgressBar} from 'react-bootstrap';
 import {useEffect, useState} from 'react';
 
 const Timer = () => {
-    const [play, setPlay]= useState(true)
+    const [now, setNow] = useState(100)
 
     useEffect(() => {
        
-        if (play) {
-           
-            setTimeout(() => {
-                setPlay(false)
-
-            }, 10000)
+        const interval = setInterval(() => {
+            setNow(prev =>{
+                if (prev <= 0) {
+                    clearInterval(interval)
+                    gameOver() 
+                }
+                return (prev - 1)
+            }) 
             
+        }, 100)
+        
+        return () => clearInterval(interval)
 
-        }
-
-    }, [play])
+    }, [])
     
     const gameOver = () => {
         console.log('Game Over')
         return null
     }
-    console.log('Rendered now')
-
-    return (
-    play ? <ProgressBar now={100} label={`100%`} /> : gameOver()
-    )
+    return <ProgressBar striped variant="info" now={now} label={`${now}%`} /> 
+    
     
 }
 
