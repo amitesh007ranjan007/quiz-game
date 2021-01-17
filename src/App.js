@@ -1,17 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Headbar from './components/headbar/headbar';
-import Timer from './components/timer/timer';
-import QuizQuestion from './components/quizQuestion/quizQuestion';
-import Options from './components/options/options';
+
+import Game from './game/game';
 
 function App() {
+  console.log('App called')
+
   return (
     <div className="Centered">
-      <Headbar />
-      <Timer />
-      <QuizQuestion />
-      <Options />
+      <Game />
     </div>
   );
 }
