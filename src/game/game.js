@@ -7,7 +7,7 @@ import Options from '../components/options/options';
 
 const Game = memo((props) => {
 
-    const [now, setNow] = useState(100)
+    // const [now, setNow] = useState(100)
     const [ questions, setQuestions ] = useState([]);
     
   useEffect(() => {
@@ -26,7 +26,6 @@ const Game = memo((props) => {
   }, []);
 
   const nextQuestion = useCallback(() => {
-    console.log('Next question called')
     if (questions.length > 0) {
       const listOFQuests = [...questions]
       listOFQuests.splice(0, 1);
@@ -36,19 +35,10 @@ const Game = memo((props) => {
   }, [questions]);
 
     useEffect(() => {
-       
-        const interval = setInterval(() => {
-            setNow(prev =>{
-                if (prev <= 0) {
-                    clearInterval(interval)
-                    nextQuestion()
-                }
-                return (prev - 1)
-            }) 
-            
-        }, 100)
-        
-        return () => clearInterval(interval)
+
+        setTimeout(() => {
+            nextQuestion()
+        }, 15000)
 
     }, [nextQuestion])
     console.log('Game rendered')
@@ -58,7 +48,7 @@ const Game = memo((props) => {
         card = (
             <Fragment>
                 <Headbar />
-                <Timer now={now} />
+                <Timer />
                 <QuizQuestion question={questions[0]} />
                 <Options />
         </Fragment>
