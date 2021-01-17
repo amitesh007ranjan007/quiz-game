@@ -12,7 +12,7 @@ const Timer = (props) => {
                     if (prev <= 0) {
                         clearInterval(interval)
                     }
-                    return (prev - 1)
+                    return (prev - 0.9)
                 }) 
                 
             }, 100)

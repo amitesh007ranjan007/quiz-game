@@ -19,8 +19,7 @@ const Game = memo((props) => {
      .then(res => {
        const arr = [];
        for (let key in res.data) {
-         arr.push(res.data[key])
-         
+         arr.push(res.data[key]) 
        }
        setQuestions(arr);
        setTotalCount(arr.length);
@@ -44,7 +43,7 @@ const Game = memo((props) => {
 
         setTimeout(() => {
             nextQuestion()
-        }, 10000)
+        }, 12000)
 
     }, [nextQuestion])
     console.log('Game rendered')
@@ -54,9 +53,9 @@ const Game = memo((props) => {
         card = (
             <Fragment>
                 <Headbar total={totalCount} current={currentCount} />
-                <Timer question={questions[0]} />
-                <QuizQuestion question={questions[0]} />
-                <Options />
+                <Timer question={questions[0].quest} />
+                <QuizQuestion question={questions[0].quest} />
+                <Options choices={questions[0].options} answer={questions[0].ans} />
         </Fragment>
         )
     }
