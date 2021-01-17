@@ -9,6 +9,9 @@ const Game = memo((props) => {
 
     // const [now, setNow] = useState(100)
     const [ questions, setQuestions ] = useState([]);
+    const [totalCount, setTotalCount ] = useState([]);
+    const [ currentCount, setCurrentCount ] = useState([]);
+    
     
   useEffect(() => {
 
@@ -20,6 +23,8 @@ const Game = memo((props) => {
          
        }
        setQuestions(arr);
+       setTotalCount(arr.length);
+       setCurrentCount(1);
      })
      .catch(err => console.log('error ocurred'))
 
@@ -30,6 +35,7 @@ const Game = memo((props) => {
       const listOFQuests = [...questions]
       listOFQuests.splice(0, 1);
       setQuestions(listOFQuests);
+      setCurrentCount(prev => prev + 1)
     }
 
   }, [questions]);
@@ -38,17 +44,17 @@ const Game = memo((props) => {
 
         setTimeout(() => {
             nextQuestion()
-        }, 15000)
+        }, 10000)
 
     }, [nextQuestion])
     console.log('Game rendered')
-    let card = null
+    let card = <h1>Game Over</h1>
     
     if (questions.length > 0) {
         card = (
             <Fragment>
-                <Headbar />
-                <Timer />
+                <Headbar total={totalCount} current={currentCount} />
+                <Timer question={questions[0]} />
                 <QuizQuestion question={questions[0]} />
                 <Options />
         </Fragment>
